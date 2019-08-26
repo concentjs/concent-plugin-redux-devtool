@@ -1,0 +1,25 @@
+{
+  "name": "concent-plugin-redux-devtool",
+  "version": "1.0.0",
+  "description": "link concent app to redux plugin of chrome",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "concent",
+    "redux-devtool",
+    "devtool",
+    "redux"
+  ],
+  "author": "fantasticsoul",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/concentjs/concent-plugin-redux-devtool.git"
+  },
+  "dependencies": {
+    "concent": "^1.5.16",
+    "redux": "^4.0.4"
+  }
+}
