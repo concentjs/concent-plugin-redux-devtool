@@ -38,7 +38,7 @@ function injectReduxDevTool() {
       actionPrevLen++;
     } else {
       // 来自于devtool点击jump 或者 skip
-      if (window.alert) window.alert('暂未打通concent与redux dev tool的jump、skip等功能');
+      console.warn('暂未打通concent与redux dev tool的jump、skip等功能');
     }
   });
 
@@ -60,6 +60,11 @@ toExport.install = function (on) {
   on(cst.SIG_STATE_CHANGED, function (data) {
     dispatchAction(data.payload)
   });
+
+  on(cst.SIG_MODULE_CONFIGURED, function () {
+    reduxStore.replaceReducer(combineReducers(createReducers()));
+  });
+
   return { name: pluginName }
 }
 
