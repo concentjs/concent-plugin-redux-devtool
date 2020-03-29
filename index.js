@@ -1,6 +1,8 @@
 var { cst, ccContext, getState } = require('concent');
 var { createStore, combineReducers } = require('redux');
 
+var { FORCE_UPDATE, SET_STATE, SET_MODULE_STATE, INVOKE, SYNC } = cst;
+
 var pluginName = 'reduxDevTool';
 var toExport = module.exports = {};
 var reduxStore = null;
@@ -53,12 +55,26 @@ function dispatchAction(actionForRedux){
   }
 }
 
+function getActionType(calledBy, type) {
+  if ([FORCE_UPDATE, SET_STATE, SET_MODULE_STATE, INVOKE, SYNC].includes(calledBy)) {
+    return `ccApi/${calledBy}`;
+  } else {
+    return `dispatch/${type}`;
+  }
+}
+
+function getPayload(payload) {
+  const newPayload = Object.assign({}, payload);
+  newPayload.type = getActionType(payload.calledBy, payload.type);
+  return newPayload;
+}
+
 /** concent启动时会调用一次插件的install接口 */
 toExport.install = function (on) {
   injectReduxDevTool();
 
   on(cst.SIG_STATE_CHANGED, function (data) {
-    dispatchAction(data.payload)
+    dispatchAction(getPayload(data.payload));
   });
 
   on(cst.SIG_MODULE_CONFIGURED, function () {
