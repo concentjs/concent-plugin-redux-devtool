@@ -1,10 +1,10 @@
 ### how to use
 - step 1, install it
-```
+```bash
 npm i concent-plugin-redux-devtool
 ```
 - setp 2, config it to concent startupOption's plugins
-```
+```js
 import { run } from 'concent';
 import reduxDevToolPlugin from 'concent-plugin-redux-devtool';
 
