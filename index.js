@@ -20,8 +20,8 @@ function createReducer(module, initState) {
 }
 
 function createReducers() {
-  const modules = Object.keys(ccContext.moduleName_stateKeys_);
-  const reducers = {};
+  var modules = Object.keys(ccContext.moduleName_stateKeys_);
+  var reducers = {};
   modules.forEach(function (m) {
     reducers[m] = createReducer(m, getState(m));
   });
@@ -34,13 +34,13 @@ function injectReduxDevTool() {
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
 
-  reduxStore.subscribe(function(){
+  reduxStore.subscribe(function () {
     if (actionLen === actionPrevLen + 1) {
       //来自于concent的监听
       actionPrevLen++;
     } else {
       // 来自于devtool点击jump 或者 skip
-      console.warn('暂未打通concent与redux dev tool的jump、skip等功能');
+      if (toolConf.log) console.warn('暂未打通concent与redux dev tool的jump、skip等功能');
     }
   });
 
@@ -48,7 +48,7 @@ function injectReduxDevTool() {
 
 var actionLen = 1;
 var actionPrevLen = 1;
-function dispatchAction(actionForRedux){
+function dispatchAction(actionForRedux) {
   if (reduxStore) {
     actionLen++;
     reduxStore.dispatch(actionForRedux);
@@ -82,6 +82,12 @@ toExport.install = function (on) {
   });
 
   return { name: pluginName }
+}
+
+var toolConf = { log: true };
+toExport.setConf = function (conf) {
+  var _conf = conf || {};
+  if (_conf.log !== undefined) toolConf.log = _conf.log;
 }
 
 
