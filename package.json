@@ -1,6 +1,6 @@
 {
   "name": "concent-plugin-redux-devtool",
-  "version": "2.0.3",
+  "version": "2.0.5",
   "description": "link concent app to redux plugin of chrome",
   "main": "index.js",
   "scripts": {

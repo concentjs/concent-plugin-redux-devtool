@@ -20,7 +20,7 @@ function createReducer(module, initState) {
 }
 
 function createReducers() {
-  var modules = Object.keys(ccContext.moduleName_stateKeys_);
+  var modules = Object.keys(ccContext.moduleName2stateKeys);
   var reducers = {};
   modules.forEach(function (m) {
     reducers[m] = createReducer(m, getState(m));
