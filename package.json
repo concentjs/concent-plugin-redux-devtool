@@ -1,9 +1,9 @@
 {
   "name": "concent-plugin-redux-devtool",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "link concent app to redux plugin of chrome",
   "main": "index.js",
-  "types": "index.d.ts",
+  "types": "types.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
