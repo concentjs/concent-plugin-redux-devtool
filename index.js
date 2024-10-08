@@ -12,7 +12,8 @@ function createReducer(module, initState) {
     if (state === undefined) state = initState;
 
     if (action.module === module) {
-      return Object.assign(state, action.payload);
+      var targetPayload = action.sharedState || action.payload;
+      return Object.assign(state, targetPayload);
     } else {
       return state;
     }
